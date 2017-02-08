@@ -5,10 +5,13 @@ const total = 100;
 const file = './public/json/users.json'
 
 const iterator = new Array(total).fill(); // How many users to generate?
+let users = {
+  data: null
+}
 
 console.log("Here's", total, "users 4 U.");
 
-let users = iterator.map((_, i) => {
+users.data = iterator.map((_, i) => {
 
   const gender = faker.random.number(1);
 
