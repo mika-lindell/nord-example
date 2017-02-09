@@ -13,7 +13,7 @@ class UsersComponent extends React.Component {
         <div>
           <h1>Users</h1>
           {this.props.users.users.map((user) => 
-            <UserComponent key={user.id} user={user} />
+            <UserComponent key={user.id} user={user} remove={this.props.remove} />
           )}
         </div>
       );

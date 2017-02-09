@@ -1,7 +1,7 @@
 import  React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
-import { usersFetch, userAdd } from '../users/users.actions.jsx';
+import { usersFetch, userAdd, userRemove } from '../users/users.actions.jsx';
 import UsersComponent from '../users/users.component.jsx';
 import User from '../users/user.type.jsx';
 
@@ -15,14 +15,13 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <button onClick={()=>this.handleClick()}>Add</button>
-        <UsersComponent users={this.props.users} />
+        <button onClick={()=>this.addUser()}>Add</button>
+        <UsersComponent users={this.props.users} remove={(user)=>this.removeUser(user)} />
       </div>
     );
   }
 
-  handleClick () {
-    console.log('here');
+  addUser(user){
     this.props.dispatch(
       userAdd(
         new User({
@@ -33,7 +32,15 @@ class App extends React.Component {
       )
     );
   }
+
+  removeUser(user){
+    this.props.dispatch(
+      userRemove(user)
+    );
+  }
 }
+
+
 const mapStateToProps = (state) => {
   return {
     users: state.users

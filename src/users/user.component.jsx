@@ -11,9 +11,9 @@ class UserComponent extends React.Component {
     const user = this.props.user;
 
     return(
-      <p>#{user.id}: {user.name}, {user.age}, {user.gender}</p>
+      <p>#{user.id}: {user.name}, {user.age}, {user.gender}<button onClick={()=>this.props.remove(user)}>rem</button></p>
     );
-    
+
   }
 
 }

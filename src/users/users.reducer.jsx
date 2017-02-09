@@ -22,11 +22,19 @@ export function users(state = {}, action) {
         ] 
       })  
 
+    case USER_REMOVE:
+
+      const index = state.users.indexOf(action.user);
+
+      return Object.assign({}, state, {
+        users: state.users.filter((_, i)=>i !== index)
+      });  
+
     case USERS_SUCCESS:
 
       return Object.assign({}, state, {
         users: action.users
-      })    
+      });    
       
     default:
       
