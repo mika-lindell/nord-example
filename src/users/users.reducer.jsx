@@ -7,9 +7,13 @@ export function users(state = {}, action) {
   switch (action.type) {
     
     case USER_ADD:
-      const nextId = state.users.length;
 
-      action.user.id = nextId
+      const maxId = Math.max.apply(
+        Math, 
+        state.users.map(user => user.id)
+      );
+
+      action.user.id = maxId + 1;
 
       return Object.assign({}, state, {
         users: [
