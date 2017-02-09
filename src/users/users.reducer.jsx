@@ -17,7 +17,7 @@ export function users(state = {}, action) {
 
       return Object.assign({}, state, {
         users: [
-          action.user,
+          new User(action.user),
           ...state.users
         ] 
       })  

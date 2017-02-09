@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { usersFetch, userAdd, userRemove } from '../users/users.actions.jsx';
 import UsersComponent from '../users/users.component.jsx';
+import UserAddComponent from '../users/user.add.component.jsx';
 import User from '../users/user.type.jsx';
 
 // This is a container, a container is something that handles data flow and passes ito nto components
@@ -15,7 +16,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <button onClick={()=>this.addUser()}>Add</button>
+        <UserAddComponent add={(user)=>this.addUser(user)} />
         <UsersComponent users={this.props.users} remove={(user)=>this.removeUser(user)} />
       </div>
     );
@@ -23,13 +24,7 @@ class App extends React.Component {
 
   addUser(user){
     this.props.dispatch(
-      userAdd(
-        new User({
-          name: 'Foo, Bar',
-          age: 24,
-          gender: 'male'
-        })
-      )
+      userAdd(user)
     );
   }
 
