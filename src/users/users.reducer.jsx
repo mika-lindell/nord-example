@@ -1,12 +1,25 @@
-
-import { USERS_SUCCESS } from '../users/users.actions.jsx';
+// Define how actions change state here
+import { USERS_SUCCESS, USER_ADD, USER_REMOVE } from './users.actions.jsx';
+import User from './user.type.jsx';
 
 export function users(state = {}, action) {
 
   switch (action.type) {
     
+    case USER_ADD:
+      const nextId = state.users.length + 1;
+
+      action.user.id = nextId
+
+      return Object.assign({}, state, {
+        users: [
+          action.user,
+          ...state.users
+        ] 
+      })  
+
     case USERS_SUCCESS:
-      // console.log('reducer', action.users);
+
       return Object.assign({}, state, {
         users: action.users
       })    

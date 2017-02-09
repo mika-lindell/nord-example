@@ -8,8 +8,6 @@ import createLogger from 'redux-logger'
 
 import rootReducer from './index.reducer.jsx';
 
-// import { fetchUsers } from './users/users.actions.jsx';
-
 import App from './app/app.container.jsx';
 
 import './scss/app.scss';
@@ -24,10 +22,6 @@ const store = createStore(
     loggerMiddleware
     )
   );
-
-// store.dispatch(fetchUsers()).then(() =>
-//   console.log(store.getState())
-// );
 
 render(
   <Provider store={store}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import UserComponent from './user.component.jsx';
 
 class UsersComponent extends React.Component {
 
@@ -12,12 +13,12 @@ class UsersComponent extends React.Component {
         <div>
           <h1>Users</h1>
           {this.props.users.users.map((user) => 
-              <p key={user.id}>#{user.id}: {user.name}, {user.age}, {user.gender}</p>
+            <UserComponent key={user.id} user={user} />
           )}
         </div>
       );
     }else{
-      return (<div></div>);
+      return (<div>Loading...</div>);
     }
     
   }

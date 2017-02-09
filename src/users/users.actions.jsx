@@ -1,55 +1,61 @@
-import fetch from 'isomorphic-fetch'
+// Define available actions and how they are dispatched here
+
+import fetch from 'isomorphic-fetch';
+import User from './user.type.jsx';
+
+export const USER_ADD = 'USER_ADD';
+export function userAdd(user){
+  return{
+    type: USER_ADD,
+    user: user 
+  }
+}
+
+export const USER_REMOVE = 'USER_REMOVE';
+export function userRemove(user){
+  return{
+    type: USER_REMOVE,
+    user: user
+  }
+}
 
 export const USERS_REQUEST = 'USERS_REQUEST'
-function requestUsers(){
+function usersRequest(){
   return{
     type: USERS_REQUEST
   }
 }
 
 export const USERS_SUCCESS = 'USERS_SUCCESS'
-
-function receiveUsers(json){
+function usersSuccess(json){
   return {
     type: USERS_SUCCESS,
-    users: json.data.map(user => user),
+    users: json.data.map(value => new User(value)),
     receivedAt: Date.now()
   }
 }
 
 export const USERS_FAILURE = 'USERS_FAILURE'
-function failUsers(){
+function usersFailure(){
   return {
     type: USERS_FAILURE,
     receivedAt: Date.now()
   }
 }
+
+// Example of async fetch
 // Modified from http://redux.js.org/docs/advanced/AsyncActions.html
-// Meet our first thunk action creator!
-// Though its insides are different, you would use it just like any other action creator:
-// store.dispatch(fetchPosts('reactjs'))
-
-export function fetchUsers() {
-
-  // Thunk middleware knows how to handle functions.
-  // It passes the dispatch method as an argument to the function,
-  // thus making it able to dispatch actions itself.
+export function usersFetch() {
 
   return function (dispatch) {
 
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
-
-    dispatch(requestUsers())
-
-    // The function called by the thunk middleware can return a value,
-    // that is passed on as the return value of the dispatch method.
-
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
+    dispatch(usersRequest())
 
     return fetch('./public/json/users.json')
       .then((response) => {
+        // catch any error in the network call.
         if (response.status >= 400) {
             return null;
         }else{
@@ -57,17 +63,13 @@ export function fetchUsers() {
         }
       })
       .then((json) =>{ 
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
+        // Update the app state with the results of the API call.
         if(json) 
-          dispatch(receiveUsers(json));
+          dispatch(usersSuccess(json));
         else
-          dispatch(failUsers());
-      })
-
-      // In a real world app, you also want to
-      // catch any error in the network call.
+          dispatch(usersFailure());
+      }) 
   }
 }
 
-export default fetchUsers;
+export default usersFetch;
