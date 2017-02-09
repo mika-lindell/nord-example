@@ -15,10 +15,12 @@ users.data = iterator.map((_, i) => {
 
   const gender = faker.random.number(1);
 
+  console.log(faker.name.firstName);
+
   let user = {
     id:     i,
-    name:   faker.name.firstName(gender) + ' ' + faker.name.lastName(gender),
-    age:    faker.random.number(100),
+    name:   faker.name.lastName(1) + ', ' + faker.name.firstName(1),
+    age:    faker.random.number(80),
     gender: gender === 0 ? 'male' : 'female'
   };
 
@@ -27,6 +29,7 @@ users.data = iterator.map((_, i) => {
   return user;
 });
 
+users.data.reverse()
 
 jsonfile.writeFile(file, users, (err) => {
   if(err) console.error(err);
