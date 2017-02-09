@@ -7,7 +7,7 @@ export function users(state = {}, action) {
   switch (action.type) {
     
     case USER_ADD:
-      const nextId = state.users.length + 1;
+      const nextId = state.users.length;
 
       action.user.id = nextId
 
