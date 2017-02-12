@@ -21,6 +21,22 @@ export function userRemove(user){
   }
 }
 
+export const USER_EDIT_BEGIN = 'USER_EDIT_BEGIN';
+export function userEditBegin(user){
+  return{
+    type: USER_EDIT_BEGIN,
+    user: user
+  }
+}
+
+export const USER_EDIT_COMPLETE = 'USER_EDIT_COMPLETE';
+export function userEditComplete(current, changes){
+  return{
+    type: USER_EDIT_COMPLETE,
+    current: current,
+    changes: changes
+  }
+}
 
 export const USERS_SET_SORTING = 'USERS_SET_SORTING'
 export function usersSetSorting(key, asc){

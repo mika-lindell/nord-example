@@ -1,5 +1,7 @@
 import React from 'react';
-import UserComponent from './user.component.jsx';
+import { connect } from 'react-redux'
+import { usersSort } from '../users/users.actions.jsx';
+import UserComponent from './user.container.jsx';
 
 class UsersComponent extends React.Component {
 
@@ -8,7 +10,7 @@ class UsersComponent extends React.Component {
   }
 
   render() {
-    if(typeof this.props.users.users !== 'undefined'){
+    if(typeof this.props.users.all !== 'undefined'){
       return (
         <div>
           <h1>Users</h1>
@@ -16,33 +18,32 @@ class UsersComponent extends React.Component {
             <tbody>
               <tr>
                 <th
-                  onClick={()=>this.props.sort('id')}
+                  onClick={()=>this.sortUsers('id')}
                 >
                   ID
                 </th>
                 <th
-                  onClick={()=>this.props.sort('name')}
+                  onClick={()=>this.sortUsers('name')}
                 >
                   Name
                 </th>
                 <th
-                  onClick={()=>this.props.sort('age')}
+                  onClick={()=>this.sortUsers('age')}
                 >
                   Age
                 </th>
                 <th
-                  onClick={()=>this.props.sort('gender')}
+                  onClick={()=>this.sortUsers('gender')}
                 >
                   Gender
                 </th>
                 <th>
                 </th>
               </tr>
-              {this.props.users.users.map((user) => 
+              {this.props.users.all.map((user) => 
                 <UserComponent 
                   key={user.id} 
                   user={user} 
-                  remove={this.props.remove} 
                 />
               )}
             </tbody>
@@ -55,6 +56,21 @@ class UsersComponent extends React.Component {
     
   }
 
+  sortUsers(key){
+
+    const asc = this.props.users.sort.key === key ? !this.props.users.sort.asc : this.props.users.sort.asc;
+
+    this.props.dispatch(
+      usersSort(key, asc)
+    );
+  }
+
 }
 
-export default UsersComponent;
+const mapStateToProps = (state) => {
+  return {
+    users: state.users
+  }
+}
+
+export default connect(mapStateToProps)(UsersComponent);

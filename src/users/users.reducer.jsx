@@ -1,53 +1,88 @@
 // Define how actions change state here
-import { USER_ADD, USER_REMOVE, USERS_SET_SORTING, USERS_SUCCESS } from './users.actions.jsx';
+import { 
+  USER_ADD, 
+  USER_REMOVE, 
+  USER_EDIT_BEGIN, 
+  USER_EDIT_COMPLETE, 
+  USERS_SET_SORTING, 
+  USERS_SUCCESS 
+} from './users.actions.jsx';
+
 import User from './user.type.jsx';
 import SortOrder from './sort_order.type.jsx';
 
 const initialState = {
-  users: new Array(),
-  sort: new SortOrder()
+  all: new Array(),
+  sort: new SortOrder(),
+  editing: {
+    inProgress: false,
+    user: null
+  }
 };
 
 export function users(state = initialState, action) {
 
+  let index, params, newState;
+
   switch (action.type) {
     
+    /** USER_ADD **/
     case USER_ADD:
-
       const maxId = Math.max.apply(
         Math, 
-        state.users.map(user => user.id)
+        state.all.map(user => user.id)
       );
-
       action.user.id = maxId + 1;
-
       return Object.assign({}, state, {
-        users: [
+        all: [
           new User(action.user),
-          ...state.users
+          ...state.all
         ] 
       })  
 
+     /** USER_REMOVE **/
     case USER_REMOVE:
-
-      const index = state.users.indexOf(action.user);
-
+      index = state.all.indexOf(action.user);
       return Object.assign({}, state, {
-        users: state.users.filter((_, i) => i !== index)
+        all: state.all.filter((_, i) => i !== index)
       });  
 
+     /** USER_EDIT_BEGIN **/
+    case USER_EDIT_BEGIN:
+      return Object.assign({}, state, {
+        editing: {
+          inProgress: true,
+          user: action.user
+        }
+      });  
+
+    /** USER_EDIT_COMPLETE **/
+    case USER_EDIT_COMPLETE:
+      index = state.all.indexOf(action.current);
+      newState = Object.assign({}, state, {
+        editing: {
+          inProgress: false,
+          user: null
+        }
+      });
+      params = Object.assign({}, action.current, action.changes);
+      newState.all[index] = new User(params);
+      return newState;
+
+    /** USERS_SET_SORTING **/
     case USERS_SET_SORTING:
       return Object.assign({}, state, {
         sort: new SortOrder(action.sort)
       });  
 
+    /** USERS_SUCCESS **/
     case USERS_SUCCESS:
       return Object.assign({}, state, {
-        users: action.users
+        all: action.users
       });    
       
+    /** DEFAULT **/
     default:
-      
       return state
   }
 }
