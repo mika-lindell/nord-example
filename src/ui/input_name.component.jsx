@@ -10,6 +10,7 @@ class InputName extends React.Component {
     return(
         <input 
           tabIndex="1" required type="text" name="name" 
+          disabled={this.props.disabled}
           value={this.props.value} 
           onChange={(e)=>this.props.handleChange(e)} 
         />

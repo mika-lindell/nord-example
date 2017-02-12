@@ -28,13 +28,25 @@ class UserComponent extends React.Component {
           #{this.props.user.id}
         </td>
         <td>
-          <InputName value={this.state.name} handleChange={(e)=>this.handleChange(e)} />
+          <InputName 
+            value={this.state.name} 
+            disabled={this.isDisabled()}
+            handleChange={(e)=>this.handleChange(e)} 
+          />
         </td>
         <td>
-          <InputAge value={this.state.age} handleChange={(e)=>this.handleChange(e)} />
+          <InputAge 
+            value={this.state.age} 
+            disabled={this.isDisabled()}
+            handleChange={(e)=>this.handleChange(e)} 
+          />
         </td>
         <td>
-          <InputGender value={this.state.gender} handleChange={(e)=>this.handleChange(e)} />
+          <InputGender 
+            value={this.state.gender} 
+            disabled={this.isDisabled()}
+            handleChange={(e)=>this.handleChange(e)} 
+            />
         </td>
         <td>
           <button 
@@ -75,6 +87,16 @@ class UserComponent extends React.Component {
     this.props.dispatch(
       userRemove(user)
     );
+  }
+
+  isDisabled(){
+
+    if(!this.props.users.editing.user) 
+      return true;
+    else if(this.props.users.editing.user.id !== this.props.user.id)
+      return true;
+    else
+      return false; 
   }
 
 

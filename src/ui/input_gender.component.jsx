@@ -10,7 +10,8 @@ class InputGender extends React.Component {
     return(
         <select 
           tabIndex="3" name="gender" 
-          value={this.props.value} 
+          value={this.props.value}
+          disabled={this.props.disabled} 
           onChange={(e)=>this.props.handleChange(e)} 
         >
           <option value="male">Male</option>
