@@ -23,12 +23,12 @@ export function userRemove(user){
 
 
 export const USERS_SET_SORTING = 'USERS_SET_SORTING'
-export function usersSetSorting(key, direction){
+export function usersSetSorting(key, asc){
   return{
     type: USERS_SET_SORTING,
     sort: new SortOrder({ 
       key: key,
-      direction: direction
+      asc: asc
     })
   }
 }
@@ -58,9 +58,9 @@ function usersFailure(){
 }
 
 
-export function usersSort(key, direction){
+export function usersSort(key, asc){
   return function (dispatch){
-    dispatch(usersSetSorting(key, direction));
+    dispatch(usersSetSorting(key, asc));
     dispatch(usersFetch());
   }
 }
@@ -72,7 +72,7 @@ export function usersFetch() {
   return function (dispatch, getState) {
 
     const state = getState();
-    const api = `./public/json/users_${state.users.sort.key}_${state.users.sort.direction}.json`;
+    const api = `./public/json/users_${state.users.sort.key}_${state.users.sort.asc ? 'asc' : 'desc'}.json`;
 
     // First dispatch: the app state is updated to inform
     // that the API call is starting.

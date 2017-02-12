@@ -15,7 +15,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <main>
         <UserAddComponent 
           add={(user)=>this.addUser(user)} 
         />
@@ -24,7 +24,7 @@ class App extends React.Component {
           sort={(key, direction)=>this.sortUsers(key, direction)}
           remove={(user)=>this.removeUser(user)} 
         />
-      </div>
+      </main>
     );
   }
 
@@ -40,9 +40,13 @@ class App extends React.Component {
     );
   }
 
-  sortUsers(key, direction){
+  sortUsers(key){
+
+    const asc = this.props.users.sort.key === key ? !this.props.users.sort.asc : this.props.users.sort.asc;
+
+
     this.props.dispatch(
-      usersSort(key, direction)
+      usersSort(key, asc)
     );
   }
 
