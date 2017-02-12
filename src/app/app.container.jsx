@@ -1,7 +1,7 @@
 import  React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
-import { usersFetch, userAdd, userRemove } from '../users/users.actions.jsx';
+import { usersSort, usersFetch, userAdd, userRemove } from '../users/users.actions.jsx';
 import UsersComponent from '../users/users.component.jsx';
 import UserAddComponent from '../users/user.add.component.jsx';
 import User from '../users/user.type.jsx';
@@ -16,8 +16,14 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <UserAddComponent add={(user)=>this.addUser(user)} />
-        <UsersComponent users={this.props.users} remove={(user)=>this.removeUser(user)} />
+        <UserAddComponent 
+          add={(user)=>this.addUser(user)} 
+        />
+        <UsersComponent 
+          users={this.props.users} 
+          sort={(key, direction)=>this.sortUsers(key, direction)}
+          remove={(user)=>this.removeUser(user)} 
+        />
       </div>
     );
   }
@@ -33,6 +39,13 @@ class App extends React.Component {
       userRemove(user)
     );
   }
+
+  sortUsers(key, direction){
+    this.props.dispatch(
+      usersSort(key, direction)
+    );
+  }
+
 }
 
 

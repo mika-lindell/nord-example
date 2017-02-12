@@ -1,8 +1,14 @@
 // Define how actions change state here
-import { USERS_SUCCESS, USER_ADD, USER_REMOVE } from './users.actions.jsx';
+import { USER_ADD, USER_REMOVE, USERS_SET_SORTING, USERS_SUCCESS } from './users.actions.jsx';
 import User from './user.type.jsx';
+import SortOrder from './sort_order.type.jsx';
 
-export function users(state = {}, action) {
+const initialState = {
+  users: new Array(),
+  sort: new SortOrder()
+};
+
+export function users(state = initialState, action) {
 
   switch (action.type) {
     
@@ -27,11 +33,15 @@ export function users(state = {}, action) {
       const index = state.users.indexOf(action.user);
 
       return Object.assign({}, state, {
-        users: state.users.filter((_, i)=>i !== index)
+        users: state.users.filter((_, i) => i !== index)
+      });  
+
+    case USERS_SET_SORTING:
+      return Object.assign({}, state, {
+        sort: new SortOrder(action.sort)
       });  
 
     case USERS_SUCCESS:
-
       return Object.assign({}, state, {
         users: action.users
       });    

@@ -12,8 +12,18 @@ class UsersComponent extends React.Component {
       return (
         <div>
           <h1>Users</h1>
+          <button
+            onClick={()=> this.props.sort('name')}
+          >sort by name</button>
+          <button
+            onClick={()=> this.props.sort('id')}
+          >sort by id</button>
           {this.props.users.users.map((user) => 
-            <UserComponent key={user.id} user={user} remove={this.props.remove} />
+            <UserComponent 
+              key={user.id} 
+              user={user} 
+              remove={this.props.remove} 
+            />
           )}
         </div>
       );

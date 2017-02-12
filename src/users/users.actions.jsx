@@ -2,6 +2,8 @@
 
 import fetch from 'isomorphic-fetch';
 import User from './user.type.jsx';
+import SortOrder from './sort_order.type.jsx';
+
 
 export const USER_ADD = 'USER_ADD';
 export function userAdd(user){
@@ -16,6 +18,18 @@ export function userRemove(user){
   return{
     type: USER_REMOVE,
     user: user
+  }
+}
+
+
+export const USERS_SET_SORTING = 'USERS_SET_SORTING'
+export function usersSetSorting(key, direction){
+  return{
+    type: USERS_SET_SORTING,
+    sort: new SortOrder({ 
+      key: key,
+      direction: direction
+    })
   }
 }
 
@@ -43,17 +57,28 @@ function usersFailure(){
   }
 }
 
+
+export function usersSort(key, direction){
+  return function (dispatch){
+    dispatch(usersSetSorting(key, direction));
+    dispatch(usersFetch());
+  }
+}
+
 // Example of async fetch
 // Modified from http://redux.js.org/docs/advanced/AsyncActions.html
 export function usersFetch() {
 
-  return function (dispatch) {
+  return function (dispatch, getState) {
+
+    const state = getState();
+    const api = `./public/json/users_${state.users.sort.key}_${state.users.sort.direction}.json`;
 
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
     dispatch(usersRequest())
 
-    return fetch('./public/json/users.json')
+    return fetch(api)
       .then((response) => {
         // catch any error in the network call.
         if (response.status >= 400) {
