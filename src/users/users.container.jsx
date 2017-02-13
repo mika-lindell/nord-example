@@ -10,6 +10,9 @@ class UsersComponent extends React.Component {
   }
 
   render() {
+
+    const sortIcon = this.props.users.sort.asc ? 'icon-arrow_downward' : 'icon-arrow_upward';
+
     if(typeof this.props.users.all !== 'undefined'){
       return (
         <div>
@@ -20,21 +23,33 @@ class UsersComponent extends React.Component {
                   onClick={()=>this.sortUsers('id')}
                 >
                   ID
+                  {this.props.users.sort.key === 'id' && 
+                    <i className={sortIcon} />
+                  }
                 </th>
                 <th
                   onClick={()=>this.sortUsers('name')}
                 >
                   Name
+                  {this.props.users.sort.key === 'name' && 
+                    <i className={sortIcon} />
+                  }
                 </th>
                 <th
                   onClick={()=>this.sortUsers('age')}
                 >
                   Age
+                  {this.props.users.sort.key === 'age' && 
+                    <i className={sortIcon} />
+                  }                  
                 </th>
                 <th
                   onClick={()=>this.sortUsers('gender')}
                 >
                   Gender
+                  {this.props.users.sort.key === 'gender' && 
+                    <i className={sortIcon} />
+                  }
                 </th>
                 <th>
                 </th>
