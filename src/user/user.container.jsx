@@ -95,10 +95,12 @@ class UserComponent extends React.Component {
   }
 
   toggleEditing(current, changes){
-    if(!this.props.users.editing.inProgress){
-      startEditing(current)    
-    }else{
-      doneEditing(current, changes)   
+    if(!this.props.users.editing.inProgress)
+    {
+      this.startEditing(current)    
+    }
+    else{
+      this.doneEditing(current, changes)   
     }
   }
 
