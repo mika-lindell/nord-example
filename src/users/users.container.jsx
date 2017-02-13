@@ -13,7 +13,6 @@ class UsersComponent extends React.Component {
     if(typeof this.props.users.all !== 'undefined'){
       return (
         <div>
-          <h1>Users</h1>
           <table>
             <thead>
               <tr>

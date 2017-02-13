@@ -1,4 +1,22 @@
 .user{
 
   @extend .pure-form;
+
+  input[type="text"],
+  input[type="number"],
+  select{
+
+    &.not-editing{
+
+      box-shadow: none;
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    &.not-editing,
+    &:hover{
+    }
+
+  }
+
 }

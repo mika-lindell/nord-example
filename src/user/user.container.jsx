@@ -22,40 +22,49 @@ class UserComponent extends React.Component {
 
   render() {
 
+    const classes = 
+      this.props.users.editing.inProgress 
+      && this.props.users.editing.user.id === this.props.user.id 
+      ? 'editing' : 'not-editing';
+
     return(
-      <tr className="user">
+      <tr 
+        className="user"
+        onFocus={()=>this.startEditing(this.props.user)}
+        onBlur={()=>this.doneEditing(this.props.user, this.state)}
+      >
         <td>
           #{this.props.user.id}
         </td>
         <td>
           <InputName 
+            className={classes}
             value={this.state.name} 
-            disabled={this.isDisabled()}
-            handleChange={(e)=>this.handleChange(e)} 
+            onChange={(e)=>this.handleChange(e)} 
+            
           />
         </td>
         <td>
           <InputAge 
+            className={classes}
             value={this.state.age} 
-            disabled={this.isDisabled()}
-            handleChange={(e)=>this.handleChange(e)} 
+            onChange={(e)=>this.handleChange(e)} 
           />
         </td>
         <td>
-          <InputGender 
+          <InputGender
+            className={classes} 
             value={this.state.gender} 
-            disabled={this.isDisabled()}
-            handleChange={(e)=>this.handleChange(e)} 
+            onChange={(e)=>this.handleChange(e)} 
             />
         </td>
         <td>
           <button 
-            onClick={()=>this.editUser(this.props.user)}
+            onClick={()=>this.toggleEditing(this.props.user, this.state)}
           >
             edit
           </button>
           <button 
-            className="pure-button"
             onClick={()=>this.removeUser(this.props.user)}
           >
             rem
@@ -72,15 +81,23 @@ class UserComponent extends React.Component {
     this.setState(newState);
   }
 
-  editUser(user){
+  startEditing(user){
+    this.props.dispatch(
+      userEditBegin(user)
+    );  
+  }
+
+  doneEditing(current, changes){
+    this.props.dispatch(
+      userEditComplete(current, changes)
+    );  
+  }
+
+  toggleEditing(current, changes){
     if(!this.props.users.editing.inProgress){
-      this.props.dispatch(
-        userEditBegin(user)
-      );      
+      startEditing(current)    
     }else{
-      this.props.dispatch(
-        userEditComplete(user, this.state)
-      );    
+      doneEditing(current, changes)   
     }
   }
 

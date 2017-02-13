@@ -1,6 +1,10 @@
 
+*{
+  font-family: $font-family-regular !important;
+}
+
 body{
-  font-size: $font-size-regular;
+  @extend .font-color-regular, .font-size-regular;
 }
 
 main{
@@ -8,15 +12,52 @@ main{
   margin: 0 auto;
 }
 
-button,
-input[type="submit"]{
-  @extend .pure-button;
+h1{
+  @extend .font-weight-light; 
 }
 
 form{
   @extend .pure-form;
 }
 
-table{
-  @extend .pure-table;
+input[type="submit"]{
+  @extend .pure-button-primary;
 }
+
+button,
+input[type="submit"]{
+  @extend .pure-button, .font-color-regular;
+}
+
+table{
+  width:100%;
+  border: none;
+  @extend .pure-table;
+
+  tr{
+    &:nth-child(odd){
+      background-color: $nord-blue-light;
+    }
+  }
+
+  td{
+    border: none;
+  }
+
+  thead{
+    background: none;
+    tr{
+      &:nth-child(odd){
+        background: none;
+      }
+    }
+  }
+
+  th{
+    border: none;
+    @extend .font-color-regular, .font-weight-regular;
+  }
+
+
+}
+

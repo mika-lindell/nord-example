@@ -1,0 +1,30 @@
+.font-size-regular{
+  font-size: $font-size-regular;
+} 
+
+.font-color-regular{
+  color: $font-color-regular;
+}
+
+.font-weight-light{
+  font-weight: 300;
+}
+
+.font-weight-regular{
+  font-weight: 400;
+}
+
+.font-weight-bold{
+  font-weight: 700;
+}
+
+.form-inline{
+  label{
+    position: absolute;
+    color: transparent;
+  }
+  input,
+  select{
+    margin-right: 0.5rem;
+  }
+}
