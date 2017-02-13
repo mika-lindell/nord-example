@@ -8,7 +8,7 @@ import {
   USERS_SUCCESS 
 } from './users.actions.jsx';
 
-import User from './user.type.jsx';
+import User from '../user/user.type.jsx';
 import SortOrder from './sort_order.type.jsx';
 
 const initialState = {

@@ -23,7 +23,7 @@ class UserComponent extends React.Component {
   render() {
 
     return(
-      <tr>
+      <tr className="user">
         <td>
           #{this.props.user.id}
         </td>
@@ -55,6 +55,7 @@ class UserComponent extends React.Component {
             edit
           </button>
           <button 
+            className="pure-button"
             onClick={()=>this.removeUser(this.props.user)}
           >
             rem

@@ -1,7 +1,7 @@
 // Define available actions and how they are dispatched here
 
 import fetch from 'isomorphic-fetch';
-import User from './user.type.jsx';
+import User from '../user/user.type.jsx';
 import SortOrder from './sort_order.type.jsx';
 
 

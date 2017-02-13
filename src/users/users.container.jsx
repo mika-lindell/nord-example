@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { usersSort } from '../users/users.actions.jsx';
-import UserComponent from './user.container.jsx';
+import { usersSort } from './users.actions.jsx';
+import UserComponent from '../user/user.container.jsx';
 
 class UsersComponent extends React.Component {
 
