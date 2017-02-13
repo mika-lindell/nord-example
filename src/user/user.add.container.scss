@@ -1,3 +1,7 @@
 .form-add-user{
   @extend .form-inline;
+
+  button{
+    @extend .pure-button, .pure-button-primary;
+  }
 }

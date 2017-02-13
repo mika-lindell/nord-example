@@ -20,12 +20,18 @@ form{
   @extend .pure-form;
 }
 
+input, select{
+  box-shadow: none !important;
+}
+
 input[type="submit"]{
   @extend .pure-button-primary;
 }
 
 button,
 input[type="submit"]{
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
   @extend .pure-button, .font-color-regular;
 }
 
@@ -46,6 +52,9 @@ table{
 
   thead{
     background: none;
+    cursor: pointer;
+    @extend .font-size-small;
+
     tr{
       &:nth-child(odd){
         background: none;

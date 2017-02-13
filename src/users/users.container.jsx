@@ -16,10 +16,11 @@ class UsersComponent extends React.Component {
     if(typeof this.props.users.all !== 'undefined'){
       return (
         <div>
-          <table>
+          <table className="users">
             <thead>
               <tr>
                 <th
+                  className="users-header-id"
                   onClick={()=>this.sortUsers('id')}
                 >
                   ID
@@ -28,6 +29,7 @@ class UsersComponent extends React.Component {
                   }
                 </th>
                 <th
+                  className="users-header-name"
                   onClick={()=>this.sortUsers('name')}
                 >
                   Name
@@ -36,6 +38,7 @@ class UsersComponent extends React.Component {
                   }
                 </th>
                 <th
+                  className="users-header-age"
                   onClick={()=>this.sortUsers('age')}
                 >
                   Age
@@ -44,6 +47,7 @@ class UsersComponent extends React.Component {
                   }                  
                 </th>
                 <th
+                  className="users-header-gender"
                   onClick={()=>this.sortUsers('gender')}
                 >
                   Gender
@@ -51,7 +55,7 @@ class UsersComponent extends React.Component {
                     <i className={sortIcon} />
                   }
                 </th>
-                <th>
+                <th className="users-header-actions">
                 </th>
               </tr>
             </thead>

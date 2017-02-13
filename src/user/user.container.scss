@@ -1,22 +1,32 @@
 .user{
-
   @extend .pure-form;
 
-  input[type="text"],
-  input[type="number"],
-  select{
-
-    &.not-editing{
-
-      box-shadow: none;
-      background-color: transparent;
-      border-color: transparent;
-    }
-
-    &.not-editing,
-    &:hover{
-    }
-
+  button{
+    @extend .button-link, .font-color-light;
   }
 
+  &.not-editing{
+    input[type],
+    select{
+      background-color: transparent;
+      border-color: transparent;
+    }    
+  }
+
+  &.editing,
+  &:hover{
+    input[type],
+    select{
+      border-color: $nord-grey-light;
+      background-color: $nord-white;
+    }
+
+    button{
+      @extend .font-color-regular;
+    }
+  }
+}
+
+.user-actions{
+  @extend .text-right;
 }

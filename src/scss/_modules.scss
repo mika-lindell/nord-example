@@ -2,8 +2,15 @@
   font-size: $font-size-regular;
 } 
 
+.font-size-small{
+  font-size: $font-size-small;
+}
+
 .font-color-regular{
   color: $font-color-regular;
+}
+.font-color-light{
+  color: $font-color-light;
 }
 
 .font-weight-light{
@@ -16,6 +23,36 @@
 
 .font-weight-bold{
   font-weight: 700;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.text-right{
+  text-align: right;
+}
+
+
+
+.pure-button-primary{
+  background-color: $nord-blue-strong;
+  color: $nord-white;
+}
+
+.button-link{
+  background: none;
+  border: none;
+
+  &:hover{
+    color: $nord-blue-strong;
+  }
+
+  &:active{
+    color: $nord-blue-strong;
+    box-shadow: none;
+    transform: translateY(0.1rem);
+  }
 }
 
 .form-inline{

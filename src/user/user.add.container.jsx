@@ -39,7 +39,9 @@ class UserAddComponent extends React.Component {
             required={true}
             onChange={(e)=>this.handleChange(e)} 
           />
-        <input tabIndex="4" type="submit" value="Add" />
+        <button className="form-submit">
+          Add
+        </button>
         </fieldset>
       </form>
     );

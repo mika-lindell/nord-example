@@ -25,50 +25,46 @@ class UserComponent extends React.Component {
     const classes = 
       this.props.users.editing.inProgress 
       && this.props.users.editing.user.id === this.props.user.id 
-      ? 'editing' : 'not-editing';
+      ? 'user editing' : 'user not-editing';
 
     return(
       <tr 
-        className="user"
+        className={classes}
         onFocus={()=>this.startEditing(this.props.user)}
         onBlur={()=>this.doneEditing(this.props.user, this.state)}
       >
-        <td>
+        <td className="user-id">
           #{this.props.user.id}
         </td>
-        <td>
+        <td className="user-name">
           <InputName 
-            className={classes}
             value={this.state.name} 
             onChange={(e)=>this.handleChange(e)} 
             
           />
         </td>
-        <td>
+        <td className="user-age">
           <InputAge 
-            className={classes}
             value={this.state.age} 
             onChange={(e)=>this.handleChange(e)} 
           />
         </td>
-        <td>
+        <td className="user-gender">
           <InputGender
-            className={classes} 
             value={this.state.gender} 
             onChange={(e)=>this.handleChange(e)} 
             />
         </td>
-        <td>
+        <td className="user-actions">
           <button 
             onClick={()=>this.toggleEditing(this.props.user, this.state)}
           >
             <i className="icon-mode_edit" />
-            edit
           </button>
           <button 
             onClick={()=>this.removeUser(this.props.user)}
           >
-            rem
+            <i className="icon-delete" />
           </button>
         </td>
       </tr>
@@ -94,14 +90,8 @@ class UserComponent extends React.Component {
     );  
   }
 
-  toggleEditing(current, changes){
-    if(!this.props.users.editing.inProgress)
-    {
-      this.startEditing(current)    
-    }
-    else{
-      this.doneEditing(current, changes)   
-    }
+  toggleEditing(current){
+    this.startEditing(current)   
   }
 
   removeUser(user){
