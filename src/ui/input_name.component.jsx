@@ -9,13 +9,11 @@ class InputName extends React.Component {
   render() {
     return(
         <input 
-          type="text" name="name" 
-          value={this.props.value} 
-          autoFocus={this.props.autoFocus}
-          required={this.props.required}
-          tabIndex={this.props.tabIndex}
-          disabled={this.props.disabled}
-          onChange={(e)=>this.props.handleChange(e)} 
+          id="name" 
+          name="name" 
+          type="text"
+          placeholder="Name"
+          {...this.props}
         />
     );
   }

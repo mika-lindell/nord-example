@@ -9,13 +9,9 @@ class InputAge extends React.Component {
   render() {
     return(
         <input 
-          type="number" name="age" min="0" max="200" 
-          value={this.props.value} 
-          autoFocus={this.props.autoFocus}
-          required={this.props.required}
-          tabIndex={this.props.tabIndex}
-          disabled={this.props.disabled}
-          onChange={(e)=>this.props.handleChange(e)} 
+          type="number" id="age" name="age" min="0" max="200" 
+          placeholder="Age"
+          {...this.props}
         />
     );
   }
