@@ -16,7 +16,7 @@
   "scripts": {
     "start": "webpack-dev-server --inline --progress --host 0.0.0.0 --port 8080",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-    "factory": "node ./factory/users.js",
+    "factory": "node ./factory/users.factory.js",
     "lint": "./node_modules/.bin/eslint",
     "test": "karma start ./config/karma.conf.js",
     "test:ci": "watch 'npm run test' src/"
@@ -38,6 +38,7 @@
     "faker": "^3.1.0",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.26.0",
+    "isomorphic-fetch": "^2.2.1",
     "karma": "1.4.0",
     "karma-chai": "0.1.0",
     "karma-chai-plugins": "0.8.0",
@@ -60,6 +61,8 @@
     "react-dom": "15.4.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
+    "redux-logger": "^2.8.1",
+    "redux-thunk": "^2.2.0",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
     "watch": "1.0.1",
