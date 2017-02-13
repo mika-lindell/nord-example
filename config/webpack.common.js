@@ -33,7 +33,6 @@ module.exports = {
 
       {
         test: /\.(scss|css)$/,
-        include : helpers.root('src'),
         loader: ExtractTextPlugin.extract('css!sass') // ExtractTextPlugin will make css to its own file
       },
 
