@@ -12,4 +12,5 @@
 <glyph unicode="&#xe5cd;" glyph-name="close" d="M810 664.667l-238-238 238-238-60-60-238 238-238-238-60 60 238 238-238 238 60 60 238-238 238 238z" />
 <glyph unicode="&#xe5d8;" glyph-name="arrow_upward" d="M170 426.667l342 342 342-342-62-60-238 238v-520h-84v520l-240-238z" />
 <glyph unicode="&#xe5db;" glyph-name="arrow_downward" d="M854 426.667l-342-342-342 342 62 60 238-238v520h84v-520l240 238z" />
+<glyph unicode="&#xe872;" glyph-name="delete" d="M810 768.667v-86h-596v86h148l44 42h212l44-42h148zM256 128.667v512h512v-512c0-46-40-86-86-86h-340c-46 0-86 40-86 86z" />
 </font></defs></svg>
