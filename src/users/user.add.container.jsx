@@ -17,15 +17,20 @@ class UserAddComponent extends React.Component {
     return(
       <form onSubmit={(e)=>this.handleSubmit(e)}>
         <InputName 
-          value={this.state.name} 
+          value={this.state.name}
+          autoFocus={true}
+          required={true}
+          tabIndex={1} 
           handleChange={(e)=>this.handleChange(e)} 
         />
         <InputAge 
           value={this.state.age} 
+          tabIndex={2} 
           handleChange={(e)=>this.handleChange(e)} 
         />
         <InputGender 
           value={this.state.gender} 
+          tabIndex={3} 
           handleChange={(e)=>this.handleChange(e)} 
         />
         <input tabIndex="4" type="submit" value="Add" />
