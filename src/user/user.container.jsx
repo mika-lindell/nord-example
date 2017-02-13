@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { 
-  userRemove, 
+  userRemoveBegin, 
+  userRemoveCancel, 
+  userRemoveComplete, 
   userEditBegin, 
   userEditComplete 
 } from '../users/users.actions.jsx';
@@ -22,60 +24,82 @@ class UserComponent extends React.Component {
 
   render() {
 
-    const editing = this.props.users.editing.status === 'editing';
-    const editingMe = this.props.users.editing.user && this.props.users.editing.user.id === this.props.user.id; 
-    const classes = editing  && editingMe ? 'user editing' : 'user not-editing';
-
-    return(
-      <tr 
-        className={classes}
-        onFocus={()=>this.startEditing(this.props.user)}
-        onBlur={()=>this.doneEditing(this.props.user, this.state)}
-      >
-        <td className="user-name">
-          <InputName 
-            value={this.state.name} 
-            onChange={(e)=>this.handleChange(e)} 
-            
-          />
-        </td>
-        <td className="user-age">
-          <InputAge 
-            value={this.state.age} 
-            onChange={(e)=>this.handleChange(e)} 
-          />
-        </td>
-        <td className="user-gender">
-          <InputGender
-            value={this.state.gender} 
-            onChange={(e)=>this.handleChange(e)} 
+    const editing = this.props.user.status === 'editing';
+    const deleting = this.props.user.status === 'deleting';
+    const classes = editing ? 'user editing' : 'user not-editing';
+    
+    if(deleting){
+      return(
+        <tr className="user deleted">
+          <td colSpan="3">
+            {this.state.name} was deleted
+          </td>
+          <td className="user-actions">
+            <button 
+              className="user-undo" 
+              onClick={()=>this.cancelDeleting(this.props.user)}
+            >
+              Undo
+            </button>
+          </td>    
+        </tr>
+      );
+    }else{
+      return(
+        <tr 
+          className={classes}
+          onFocus={()=>this.startEditing(this.props.user)}
+          onBlur={()=>this.doneEditing(this.props.user, this.state)}
+        >
+          <td className="user-name">
+            <InputName 
+              data-focus-on-mount={editing}
+              value={this.state.name} 
+              onChange={(e)=>this.handleChange(e)} 
             />
-        </td>
-        <td className="user-actions">
-          {!editingMe &&
-            
-              <button 
-                onClick={()=>this.toggleEditing(this.props.user, this.state)}
-              >
-                Edit
-              </button>
-          }
-          {editing && editingMe &&
-              <button 
-                onClick={()=>this.doneEditing(this.props.user, this.state)}
-              >
-                Save
-              </button>
-          }
-          <button 
-            title="Delete"
-            onClick={()=>this.removeUser(this.props.user)}
-          >
-            <i className="icon-delete" />
-          </button>          
-        </td>
-      </tr>
-    );
+          </td>
+          <td className="user-age">
+            <InputAge 
+              value={this.state.age} 
+              onChange={(e)=>this.handleChange(e)} 
+            />
+          </td>
+          <td className="user-gender">
+            <InputGender
+              value={this.state.gender} 
+              onChange={(e)=>this.handleChange(e)} 
+              />
+          </td>
+          <td className="user-actions">
+            {!editing &&
+              
+                <button 
+                  className="user-edit" 
+                  onClick={()=>this.startEditing(this.props.user)}
+                >
+                  
+                  Edit
+                </button>
+            }
+            {editing &&
+                <button
+                  className="user-save" 
+                  onClick={()=>this.doneEditing(this.props.user, this.state)}
+                >
+                  Save
+                </button>
+            }
+            <button 
+              title="Delete"
+              className="user-delete" 
+              onClick={()=>this.startDeleting(this.props.user)}
+            >
+              <i className="icon-delete" />
+            </button>          
+          </td>
+        </tr>
+      );
+    }
 
   }
 
@@ -86,6 +110,7 @@ class UserComponent extends React.Component {
   }
 
   startEditing(user){
+    if(this.props.user.status === 'editing') return;
     this.props.dispatch(
       userEditBegin(user)
     );  
@@ -97,15 +122,26 @@ class UserComponent extends React.Component {
     );  
   }
 
-  toggleEditing(current){
-    this.startEditing(current)   
+  startDeleting(user){
+    this.props.dispatch(
+      userRemoveBegin(user)
+    );
+    setTimeout(()=>this.doneDeleting(), 5000)
   }
 
-  removeUser(user){
-    this.props.dispatch(
-      userRemove(user)
-    );
+  cancelDeleting(user){
+     this.props.dispatch(
+      userRemoveCancel(user)
+    ); 
   }
+
+  doneDeleting(){
+    if(this.props.user.status === 'deleting'){
+      this.props.dispatch(
+        userRemoveComplete(this.props.user) // TODO: Do id-based check in reduced so i can pass user as param and dont have to use this.props.user
+      );
+    }
+  }  
 }
 
 const mapStateToProps = (state) => {

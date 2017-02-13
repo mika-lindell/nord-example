@@ -29,8 +29,17 @@
       background-color: $nord-white;
     }
     button{
-      color: $nord-white;
-      @extend .button-link;
+      @extend .button-link, .font-color-white;
+    }
+  }
+
+  &.deleted{
+    @extend .warning;
+    td{
+      padding-left: 1.2rem;
+    }
+    button{
+      @extend .font-color-white;
     }
   }
 
@@ -38,4 +47,9 @@
 
 .user-actions{
   @extend .text-right;
+}
+
+.user-edit,
+.user-save{
+  width: 4rem;
 }

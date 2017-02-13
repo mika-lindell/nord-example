@@ -12,6 +12,9 @@
 .font-color-light{
   color: $font-color-light;
 }
+.font-color-white{
+  color: $font-color-white;
+}
 
 .font-weight-light{
   font-weight: 300;
@@ -62,4 +65,9 @@
   select{
     margin-right: 0.5rem;
   }
+}
+
+.warning{
+  background-color: $warning-red; 
+  color: $nord-white; 
 }
