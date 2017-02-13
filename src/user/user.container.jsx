@@ -62,6 +62,7 @@ class UserComponent extends React.Component {
           <button 
             onClick={()=>this.toggleEditing(this.props.user, this.state)}
           >
+            <i className="icon-mode_edit" />
             edit
           </button>
           <button 
