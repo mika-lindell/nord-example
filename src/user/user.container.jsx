@@ -19,6 +19,7 @@ class UserComponent extends React.Component {
       name: this.props.user.name,
       age: this.props.user.age,
       gender: this.props.user.gender,
+      focus: false
     }
   }
 
@@ -48,25 +49,27 @@ class UserComponent extends React.Component {
       return(
         <tr 
           className={classes}
-          onFocus={()=>this.startEditing(this.props.user)}
           onBlur={()=>this.doneEditing(this.props.user, this.state)}
         >
           <td className="user-name">
             <InputName 
-              data-focus-on-mount={editing}
+              data-focus-on-mount={this.state.focus}
               value={this.state.name} 
+              onFocus={(e)=>this.beginEditing(this.props.user)}
               onChange={(e)=>this.handleChange(e)} 
             />
           </td>
           <td className="user-age">
             <InputAge 
               value={this.state.age} 
+              onFocus={(e)=>this.beginEditing(this.props.user)}
               onChange={(e)=>this.handleChange(e)} 
             />
           </td>
           <td className="user-gender">
             <InputGender
               value={this.state.gender} 
+              onFocus={(e)=>this.beginEditing(this.props.user)}
               onChange={(e)=>this.handleChange(e)} 
               />
           </td>
@@ -75,7 +78,7 @@ class UserComponent extends React.Component {
               
                 <button 
                   className="user-edit" 
-                  onClick={()=>this.startEditing(this.props.user)}
+                  onClick={(e)=>this.beginEditingWithFocus(this.props.user)}
                 >
                   
                   Edit
@@ -92,7 +95,7 @@ class UserComponent extends React.Component {
             <button 
               title="Delete"
               className="user-delete" 
-              onClick={()=>this.startDeleting(this.props.user)}
+              onClick={()=>this.beginDeleting(this.props.user)}
             >
               <i className="icon-delete" />
             </button>          
@@ -109,20 +112,27 @@ class UserComponent extends React.Component {
     this.setState(newState);
   }
 
-  startEditing(user){
+  beginEditing(user){
     if(this.props.user.status === 'editing') return;
     this.props.dispatch(
       userEditBegin(user)
     );  
   }
 
+  beginEditingWithFocus(user){
+    if(this.props.user.status === 'editing') return;
+    this.setState({focus: true})
+    this.beginEditing(user);
+  }
+
   doneEditing(current, changes){
+    this.setState({focus: false})
     this.props.dispatch(
       userEditComplete(current, changes)
     );  
   }
 
-  startDeleting(user){
+  beginDeleting(user){
     this.props.dispatch(
       userRemoveBegin(user)
     );
