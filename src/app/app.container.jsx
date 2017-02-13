@@ -20,6 +20,7 @@ class App extends React.Component {
       <main>
         <Row>
           <Col u='5-5'>
+            <h1>Add a person</h1>
             <UserAddComponent />
             <UsersComponent 
               users={this.props.users}
