@@ -15,25 +15,32 @@ class UserAddComponent extends React.Component {
 
   render() {
     return(
-      <form onSubmit={(e)=>this.handleSubmit(e)}>
-        <InputName 
-          value={this.state.name}
-          autoFocus={true}
-          required={true}
-          tabIndex={1} 
-          handleChange={(e)=>this.handleChange(e)} 
-        />
-        <InputAge 
-          value={this.state.age} 
-          tabIndex={2} 
-          handleChange={(e)=>this.handleChange(e)} 
-        />
-        <InputGender 
-          value={this.state.gender} 
-          tabIndex={3} 
-          handleChange={(e)=>this.handleChange(e)} 
-        />
+      <form 
+        className="form-add-user"
+        onSubmit={(e)=>this.handleSubmit(e)}
+      >
+        <fieldset>
+          <label htmlFor="name">Name</label>
+          <InputName 
+            value={this.state.name}
+            autoFocus={true}
+            required={true}
+            onChange={(e)=>this.handleChange(e)} 
+          />
+          <label htmlFor="age">Age</label>
+          <InputAge 
+            value={this.state.age} 
+            required={true}
+            onChange={(e)=>this.handleChange(e)} 
+          />
+          <label htmlFor="gender">Gender</label>
+          <InputGender 
+            value={this.state.gender} 
+            required={true}
+            onChange={(e)=>this.handleChange(e)} 
+          />
         <input tabIndex="4" type="submit" value="Add" />
+        </fieldset>
       </form>
     );
   }
@@ -41,7 +48,7 @@ class UserAddComponent extends React.Component {
   defaultState(){
     const defaultState = {
       name: '',
-      age: 25,
+      age: '',
       gender: 'male'
     };
     return Object.assign({}, defaultState);
