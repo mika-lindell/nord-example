@@ -15,7 +15,7 @@ class UsersComponent extends React.Component {
         <div>
           <h1>Users</h1>
           <table>
-            <tbody>
+            <thead>
               <tr>
                 <th
                   onClick={()=>this.sortUsers('id')}
@@ -40,6 +40,8 @@ class UsersComponent extends React.Component {
                 <th>
                 </th>
               </tr>
+            </thead>
+            <tbody>
               {this.props.users.all.map((user) => 
                 <UserComponent 
                   key={user.id} 
