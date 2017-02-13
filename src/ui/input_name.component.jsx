@@ -6,9 +6,12 @@ class InputName extends React.Component {
     super(props);
   }
 
+
+
   render() {
     return(
         <input 
+          ref={(input)=>this.elem=input}
           id="name" 
           name="name" 
           type="text"
@@ -16,6 +19,10 @@ class InputName extends React.Component {
           {...this.props}
         />
     );
+  }
+
+  componentDidUpdate(){
+    if(this.props['data-focus-on-mount']) this.elem.focus();
   }
 }
 
