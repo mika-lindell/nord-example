@@ -20,15 +20,6 @@ class UsersComponent extends React.Component {
             <thead>
               <tr>
                 <th
-                  className="users-header-id"
-                  onClick={()=>this.sortUsers('id')}
-                >
-                  ID
-                  {this.props.users.sort.key === 'id' && 
-                    <i className={sortIcon} />
-                  }
-                </th>
-                <th
                   className="users-header-name"
                   onClick={()=>this.sortUsers('name')}
                 >

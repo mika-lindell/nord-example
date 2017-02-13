@@ -44,14 +44,18 @@ export function users(state = initialState, action) {
     case USER_REMOVE:
       index = state.all.indexOf(action.user);
       return Object.assign({}, state, {
-        all: state.all.filter((_, i) => i !== index)
+        all: state.all.filter((_, i) => i !== index),
+        editing:{
+          status: 'removed',
+          user: action.user
+        }
       });  
 
      /** USER_EDIT_BEGIN **/
     case USER_EDIT_BEGIN:
       return Object.assign({}, state, {
         editing: {
-          inProgress: true,
+          status: 'editing',
           user: action.user
         }
       });  
@@ -61,8 +65,8 @@ export function users(state = initialState, action) {
       index = state.all.indexOf(action.current);
       newState = Object.assign({}, state, {
         editing: {
-          inProgress: false,
-          user: null
+          status: 'saved',
+          user: action.user
         }
       });
       params = Object.assign({}, action.current, action.changes);

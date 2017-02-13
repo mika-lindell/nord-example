@@ -33,8 +33,6 @@
   text-align: right;
 }
 
-
-
 .pure-button-primary{
   background-color: $nord-blue-strong;
   color: $nord-white;
@@ -43,6 +41,7 @@
 .button-link{
   background: none;
   border: none;
+  padding: 0.5rem 0.5rem;
 
   &:hover{
     color: $nord-blue-strong;
@@ -51,7 +50,6 @@
   &:active{
     color: $nord-blue-strong;
     box-shadow: none;
-    transform: translateY(0.1rem);
   }
 }
 

@@ -1,6 +1,5 @@
 .user{
   @extend .pure-form;
-
   button{
     @extend .button-link, .font-color-light;
   }
@@ -10,21 +9,31 @@
     select{
       background-color: transparent;
       border-color: transparent;
+      &:hover{
+        border-color: $nord-grey-light;
+        background-color: $nord-white;
+      }
+    }
+    &:hover{
+      button{
+        @extend .font-color-regular;
+      }
     }    
   }
 
-  &.editing,
-  &:hover{
+  &.editing{
+    background-color: $nord-blue-strong; 
     input[type],
     select{
       border-color: $nord-grey-light;
       background-color: $nord-white;
     }
-
     button{
-      @extend .font-color-regular;
+      color: $nord-white;
+      @extend .button-link;
     }
   }
+
 }
 
 .user-actions{

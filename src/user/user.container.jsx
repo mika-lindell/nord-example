@@ -22,10 +22,9 @@ class UserComponent extends React.Component {
 
   render() {
 
-    const classes = 
-      this.props.users.editing.inProgress 
-      && this.props.users.editing.user.id === this.props.user.id 
-      ? 'user editing' : 'user not-editing';
+    const editing = this.props.users.editing.status === 'editing';
+    const editingMe = this.props.users.editing.user && this.props.users.editing.user.id === this.props.user.id; 
+    const classes = editing  && editingMe ? 'user editing' : 'user not-editing';
 
     return(
       <tr 
@@ -33,9 +32,6 @@ class UserComponent extends React.Component {
         onFocus={()=>this.startEditing(this.props.user)}
         onBlur={()=>this.doneEditing(this.props.user, this.state)}
       >
-        <td className="user-id">
-          #{this.props.user.id}
-        </td>
         <td className="user-name">
           <InputName 
             value={this.state.name} 
@@ -56,16 +52,27 @@ class UserComponent extends React.Component {
             />
         </td>
         <td className="user-actions">
+          {!editingMe &&
+            
+              <button 
+                onClick={()=>this.toggleEditing(this.props.user, this.state)}
+              >
+                Edit
+              </button>
+          }
+          {editing && editingMe &&
+              <button 
+                onClick={()=>this.doneEditing(this.props.user, this.state)}
+              >
+                Save
+              </button>
+          }
           <button 
-            onClick={()=>this.toggleEditing(this.props.user, this.state)}
-          >
-            <i className="icon-mode_edit" />
-          </button>
-          <button 
+            title="Delete"
             onClick={()=>this.removeUser(this.props.user)}
           >
             <i className="icon-delete" />
-          </button>
+          </button>          
         </td>
       </tr>
     );
@@ -99,18 +106,6 @@ class UserComponent extends React.Component {
       userRemove(user)
     );
   }
-
-  isDisabled(){
-
-    if(!this.props.users.editing.user) 
-      return true;
-    else if(this.props.users.editing.user.id !== this.props.user.id)
-      return true;
-    else
-      return false; 
-  }
-
-
 }
 
 const mapStateToProps = (state) => {
