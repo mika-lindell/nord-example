@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { userAdd } from '../users/users.actions.jsx';
+import { userSetStatus, userAdd } from '../users/users.actions.jsx';
 import InputName from '../ui/input_name.component.jsx';
 import InputAge from '../ui/input_age.component.jsx';
 import InputGender from '../ui/input_gender.component.jsx';
@@ -51,7 +51,8 @@ class UserAddComponent extends React.Component {
     const defaultState = {
       name: '',
       age: '',
-      gender: 'male'
+      gender: 'male',
+      status: 'new'
     };
     return Object.assign({}, defaultState);
   }
@@ -67,6 +68,7 @@ class UserAddComponent extends React.Component {
     this.props.dispatch(
       userAdd(new User(this.state))
     );
+
     this.setState(this.defaultState());
   }
 

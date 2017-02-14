@@ -89,3 +89,29 @@
 
   @extend .success;
 }
+
+// ReacCSSTransitionGroup has some beef with animating tr, so gotta try something else for now
+@keyframes new{
+  0%{
+    outline-width: 0rem;
+  }
+  5%{
+    outline-width: 0.5rem;
+  }
+  95%{
+    outline-width: 0.5rem;
+  }  
+  100%{
+    outline-width: 0rem;
+  }
+}
+
+.new{
+  animation: new 2s 1;
+
+  outline-offset: -0.25rem;
+  outline-style: solid;
+  outline-color: $nord-blue-strong;
+  outline-width: 0rem;
+
+}
