@@ -1,17 +1,10 @@
 {
-  "name": "react-webpack-starter",
-  "version": "0.3.2",
-  "description": "React webpack starter template",
-  "main": "lib/index.js",
+  "name": "nord-example",
+  "version": "0.0.1",
+  "description": "Foolin' around w/ React & Redux",
   "dependencies": {},
   "author": {
     "name": "Mika Lindell"
-  },
-  "license": "MIT",
-  "keywords": [],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:mika-lindell/react-starter-webpack-scss.git"
   },
   "scripts": {
     "start": "webpack-dev-server --inline --progress --host 0.0.0.0 --port 8080",
