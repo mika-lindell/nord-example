@@ -1,5 +1,6 @@
 // Define how actions change state here
 import { 
+  USER_SET_STATUS,
   USER_ADD, 
   USER_REMOVE_BEGIN, 
   USER_REMOVE_CANCEL, 
@@ -36,6 +37,15 @@ export function users(state = initialState, action) {
 
   switch (action.type) {
     
+    /** USER_SET_STATUS **/
+    case USER_SET_STATUS:
+      changes = {
+        status: 'ready'
+      }
+      return createStateWithNewUser(action.user, changes, state, {});  
+
+
+
     /** USER_ADD **/
     case USER_ADD:
       const maxId = Math.max.apply(

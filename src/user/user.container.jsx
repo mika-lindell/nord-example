@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { 
+  userSetStatus,
   userRemoveBegin, 
   userRemoveCancel, 
   userRemoveComplete, 
@@ -135,7 +136,10 @@ class UserComponent extends React.Component {
     this.setState({focus: false})
     this.props.dispatch(
       userEditComplete(current, changes)
-    );  
+    );
+    let delay = setTimeout(() => {
+      this.props.dispatch(userSetStatus(this.props.user, 'ready')); // Quick n' dirty
+    }, 3000)     
   }
 
   beginDeleting(user){

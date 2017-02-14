@@ -4,6 +4,14 @@ import fetch from 'isomorphic-fetch';
 import User from '../user/user.type.jsx';
 import SortOrder from './sort_order.type.jsx';
 
+export const USER_SET_STATUS = 'USER_SET_STATUS';
+export function userSetStatus(user, status){
+  return{
+    type: USER_SET_STATUS,
+    user: user,
+    status: status 
+  }
+}
 
 export const USER_ADD = 'USER_ADD';
 export function userAdd(user){
