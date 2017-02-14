@@ -33,12 +33,11 @@ module.exports = {
 
       {
         test: /\.(scss|css)$/,
-        include : helpers.root('src'),
         loader: ExtractTextPlugin.extract('css!sass') // ExtractTextPlugin will make css to its own file
       },
 
       {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico|json)(\?.*$|$)/, // (\?.*$|$) makes sure that arguments after a filename (e.g. ?v=4.0) doesn't break the loader
         loader: 'file?name=assets/[name].[hash].[ext]'
       }
 

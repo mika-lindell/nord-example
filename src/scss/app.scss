@@ -1,7 +1,12 @@
+// Import pureCSS here instead of vendor.jsx to be able to extend pure classes
+@import '../../node_modules/purecss-sass/vendor/assets/stylesheets/purecss';
+
 @import 'vars';
 @import 'mixins';
 @import 'base';
 @import 'modules';
 
-@import '../app/app.component';
-@import '../awesome/awesome.component';
+@import '../app/app.container';
+@import '../users/users.container';
+@import '../user/user.container';
+@import '../user/user.add.container';

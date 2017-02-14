@@ -1,0 +1,91 @@
+.user{
+  @extend .pure-form;
+
+  input, select{
+    width: 100%;
+  }
+
+  button{
+    @extend .button-link, .font-color-light;
+  }
+
+  &.not-editing{
+    input[type],
+    select{
+      background-color: transparent;
+      border-color: transparent;
+      &:hover{
+        border-color: $nord-grey-light;
+        background-color: $nord-white;
+      }
+    }
+    &:hover{
+      button{
+        @extend .font-color-regular;
+      }
+    }    
+  }
+
+  &.editing{
+    background-color: $nord-blue-strong; 
+    input[type],
+    select{
+      border-color: $nord-grey-light;
+      background-color: $nord-white;
+    }
+    button{
+      @extend .button-link, .font-color-white;
+  
+    }      
+    &:hover{
+      button{
+        @extend .font-color-white;
+      }
+    } 
+  }
+
+  &.deleted{
+    @extend .warning;
+    td{
+      padding-left: 1.2rem;
+    }
+    button{
+      @extend .font-color-white;
+    }
+    &:hover{
+      button{
+        @extend .font-color-white;
+      }
+    } 
+  }
+
+}
+
+.user-age{
+  max-width: 1rem;
+}
+
+.user-gender{
+  max-width: 1rem;
+}
+
+.user-actions{
+  position: relative;
+  max-width: 3.5rem;
+  @extend .text-right;
+}
+
+.user-badge-saved{
+  position: absolute;
+  top: 0.6rem;
+  right: -1.2rem;
+
+  border-radius: 50%;
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  height: 2rem;
+  width: 2rem;
+  line-height: 2rem;
+
+  @extend .success;
+}

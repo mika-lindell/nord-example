@@ -1,26 +1,17 @@
-# React webpack starter template
+# Foolin' around w/ React & Redux
 
-Based on [https://github.com/krasimir/react-webpack-starter]
+Live example: [http://estates-officer-annabel-63888.bitballoon.com/]
 
-Requires NodeJS & npm.
 
 **To install:**
 ```
 – npm install
 ```
-<del>
-Make copies of following files:
-* *config/webpack.dev.default.ts*
-* *config/webpack.prod.default.ts*
-* *config/webpack.test.default.ts*
 
-And rename copied files to:
-* *config/webpack.dev.ts*
-* *config/webpack.prod.ts*
-* *config/webpack.test.ts*
-
-Profit: Change local config without messing it in repo.
-</del>
+**To create 100 random people**
+```
+– npm run factory
+```
 
 **Run with:**
 ```
@@ -37,16 +28,10 @@ Dev server defaults at: [http://192.168.0.100:8080/]
 – npm run build
 ```
 
+
 <del>
-* Copy *public/* and its contents to your server root
-* Copy *dist/index.html* to your server
-* Copy everything else in *dist/* to the *public/* you copied to your server
-
-Profit: Open *index.html*
-</del>
-
-
 Test with:
 ```
 – npm test
 ```
+</del>
