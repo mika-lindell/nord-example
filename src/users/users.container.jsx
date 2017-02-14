@@ -48,6 +48,7 @@ class UsersComponent extends React.Component {
                 </th>
                 <th className="users-header-actions">
                 </th>
+
               </tr>
             </thead>
             <tbody>

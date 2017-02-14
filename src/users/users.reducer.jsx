@@ -93,7 +93,7 @@ export function users(state = initialState, action) {
       newState = {
         editing: action.user
       };
-      action.changes.status = 'ready';
+      action.changes.status = 'saved';
       return createStateWithNewUser(action.current, action.changes, state, newState);
 
     /** USERS_SET_SORTING **/

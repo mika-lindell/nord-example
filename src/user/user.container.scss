@@ -1,5 +1,10 @@
 .user{
   @extend .pure-form;
+
+  input, select{
+    width: 100%;
+  }
+
   button{
     @extend .button-link, .font-color-light;
   }
@@ -30,7 +35,13 @@
     }
     button{
       @extend .button-link, .font-color-white;
-    }
+  
+    }      
+    &:hover{
+      button{
+        @extend .font-color-white;
+      }
+    } 
   }
 
   &.deleted{
@@ -41,15 +52,38 @@
     button{
       @extend .font-color-white;
     }
+    &:hover{
+      button{
+        @extend .font-color-white;
+      }
+    } 
   }
 
 }
 
+.user-age{
+  max-width: 1rem;
+}
+
+.user-gender{
+  max-width: 1rem;
+}
+
 .user-actions{
+  position: relative;
+  max-width: 3.5rem;
   @extend .text-right;
 }
 
-.user-edit,
-.user-save{
-  width: 4rem;
+.user-badge-editing,
+.user-badge-saved{
+  position: absolute;
+  top: -1rem;
+  right: 0rem;
+
+  @extend .badge;
+}
+
+.user-badge-saved{
+  @extend .success;
 }

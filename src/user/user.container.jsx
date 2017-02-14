@@ -26,6 +26,7 @@ class UserComponent extends React.Component {
   render() {
 
     const editing = this.props.user.status === 'editing';
+    const saved = this.props.user.status === 'saved';
     const deleting = this.props.user.status === 'deleting';
     const classes = editing ? 'user editing' : 'user not-editing';
     
@@ -75,30 +76,34 @@ class UserComponent extends React.Component {
           </td>
           <td className="user-actions">
             {!editing &&
-              
+              <span>
                 <button 
+                  title="Edit"
                   className="user-edit" 
                   onClick={(e)=>this.beginEditingWithFocus(this.props.user)}
                 >
-                  
-                  Edit
+                  <i className="icon-mode_edit" />
                 </button>
+                <button 
+                  title="Delete"
+                  className="user-delete" 
+                  onClick={()=>this.beginDeleting(this.props.user)}
+                >
+                  <i className="icon-delete" />
+                </button>
+              </span> 
             }
             {editing &&
                 <button
                   className="user-save" 
                   onClick={()=>this.doneEditing(this.props.user, this.state)}
                 >
-                  Save
+                  Done
                 </button>
             }
-            <button 
-              title="Delete"
-              className="user-delete" 
-              onClick={()=>this.beginDeleting(this.props.user)}
-            >
-              <i className="icon-delete" />
-            </button>          
+            {saved &&
+              <div className="user-badge-saved">Saved</div>
+            }      
           </td>
         </tr>
       );
