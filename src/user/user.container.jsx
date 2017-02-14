@@ -30,7 +30,8 @@ class UserComponent extends React.Component {
     const editing = this.props.user.status === 'editing';
     const saved = this.props.user.status === 'saved';
     const deleting = this.props.user.status === 'deleting';
-    const classes = editing ? 'user editing' : 'user not-editing';
+    const isNew = this.props.user.status === 'new';
+    const classes = `user ${isNew ? 'new' : ''} ${editing ? 'editing' : 'not-editing'}`;
     
     if(deleting){
       return(
@@ -137,7 +138,7 @@ class UserComponent extends React.Component {
     this.props.dispatch(
       userEditComplete(current, changes)
     );
-    let delay = setTimeout(() => {
+    const delay = setTimeout(() => {
       this.props.dispatch(userSetStatus(this.props.user, 'ready')); // Quick n' dirty
     }, 3000)     
   }
@@ -148,11 +149,11 @@ class UserComponent extends React.Component {
       userRemoveBegin(user)
     );
 
-    let delay = setTimeout(() => {
+    const delay = setTimeout(() => {
       if(this.props.user.status === 'deleting') this.doneDeleting();
     }, 6000)
     
-    let timer = setInterval(() => {
+    const timer = setInterval(() => {
       if(this.state.countdown <= 0 || this.props.user.status !== 'deleting') {
         clearInterval(timer);
         clearTimeout(delay);
