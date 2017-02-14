@@ -1,9 +1,17 @@
 // Define available actions and how they are dispatched here
 
 import fetch from 'isomorphic-fetch';
-import User from './user.type.jsx';
+import User from '../user/user.type.jsx';
 import SortOrder from './sort_order.type.jsx';
 
+export const USER_SET_STATUS = 'USER_SET_STATUS';
+export function userSetStatus(user, status){
+  return{
+    type: USER_SET_STATUS,
+    user: user,
+    status: status 
+  }
+}
 
 export const USER_ADD = 'USER_ADD';
 export function userAdd(user){
@@ -13,10 +21,26 @@ export function userAdd(user){
   }
 }
 
-export const USER_REMOVE = 'USER_REMOVE';
-export function userRemove(user){
+export const USER_REMOVE_BEGIN = 'USER_REMOVE_BEGIN';
+export function userRemoveBegin(user){
   return{
-    type: USER_REMOVE,
+    type: USER_REMOVE_BEGIN,
+    user: user
+  }
+}
+
+export const USER_REMOVE_CANCEL = 'USER_REMOVE_CANCEL';
+export function userRemoveCancel(user){
+  return{
+    type: USER_REMOVE_CANCEL,
+    user: user
+  }
+}
+
+export const USER_REMOVE_COMPLETE = 'USER_REMOVE_COMPLETE';
+export function userRemoveComplete(user){
+  return{
+    type: USER_REMOVE_COMPLETE,
     user: user
   }
 }

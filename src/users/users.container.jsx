@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { usersSort } from '../users/users.actions.jsx';
-import UserComponent from './user.container.jsx';
+import { usersSort } from './users.actions.jsx';
+import UserComponent from '../user/user.container.jsx';
 
 class UsersComponent extends React.Component {
 
@@ -10,35 +10,45 @@ class UsersComponent extends React.Component {
   }
 
   render() {
+
+    const sortIcon = this.props.users.sort.asc ? 'icon-arrow_downward' : 'icon-arrow_upward';
+
     if(typeof this.props.users.all !== 'undefined'){
       return (
         <div>
-          <h1>Users</h1>
-          <table>
+          <table className="users">
             <thead>
               <tr>
                 <th
-                  onClick={()=>this.sortUsers('id')}
-                >
-                  ID
-                </th>
-                <th
+                  className="users-header-name"
                   onClick={()=>this.sortUsers('name')}
                 >
                   Name
+                  {this.props.users.sort.key === 'name' && 
+                    <i className={sortIcon} />
+                  }
                 </th>
                 <th
+                  className="users-header-age"
                   onClick={()=>this.sortUsers('age')}
                 >
                   Age
+                  {this.props.users.sort.key === 'age' && 
+                    <i className={sortIcon} />
+                  }                  
                 </th>
                 <th
+                  className="users-header-gender"
                   onClick={()=>this.sortUsers('gender')}
                 >
                   Gender
+                  {this.props.users.sort.key === 'gender' && 
+                    <i className={sortIcon} />
+                  }
                 </th>
-                <th>
+                <th className="users-header-actions">
                 </th>
+
               </tr>
             </thead>
             <tbody>

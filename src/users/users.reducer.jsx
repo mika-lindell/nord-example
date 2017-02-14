@@ -1,14 +1,17 @@
 // Define how actions change state here
 import { 
+  USER_SET_STATUS,
   USER_ADD, 
-  USER_REMOVE, 
+  USER_REMOVE_BEGIN, 
+  USER_REMOVE_CANCEL, 
+  USER_REMOVE_COMPLETE, 
   USER_EDIT_BEGIN, 
   USER_EDIT_COMPLETE, 
   USERS_SET_SORTING, 
   USERS_SUCCESS 
 } from './users.actions.jsx';
 
-import User from './user.type.jsx';
+import User from '../user/user.type.jsx';
 import SortOrder from './sort_order.type.jsx';
 
 const initialState = {
@@ -20,12 +23,29 @@ const initialState = {
   }
 };
 
+const createStateWithNewUser = function(current, changes, state, newState){
+  const changedState = Object.assign({}, state, newState);
+  const index = state.all.indexOf(current);
+  const params = Object.assign({}, current, changes);
+  changedState.all[index] = new User(params);
+  return changedState;
+}
+
 export function users(state = initialState, action) {
 
-  let index, params, newState;
+  let index, newState, changes;
 
   switch (action.type) {
     
+    /** USER_SET_STATUS **/
+    case USER_SET_STATUS:
+      changes = {
+        status: 'ready'
+      }
+      return createStateWithNewUser(action.user, changes, state, {});  
+
+
+
     /** USER_ADD **/
     case USER_ADD:
       const maxId = Math.max.apply(
@@ -40,34 +60,51 @@ export function users(state = initialState, action) {
         ] 
       })  
 
-     /** USER_REMOVE **/
-    case USER_REMOVE:
+     /** USER_REMOVE_BEGIN **/
+    case USER_REMOVE_BEGIN:
+      newState = {
+        editing: action.user
+      };
+      changes = {
+        status: 'deleting'
+      }
+      return createStateWithNewUser(action.user, changes, state, newState);  
+
+     /** USER_REMOVE_CANCEL **/
+    case USER_REMOVE_CANCEL:
+      newState = {
+        editing: action.user
+      };
+      changes = {
+        status: 'ready'
+      }
+      return createStateWithNewUser(action.user, changes, state, newState);  
+
+     /** USER_REMOVE_COMPLETE **/
+    case USER_REMOVE_COMPLETE:
       index = state.all.indexOf(action.user);
       return Object.assign({}, state, {
-        all: state.all.filter((_, i) => i !== index)
+        all: state.all.filter((_, i) => i !== index),
+        editing: action.user
       });  
 
      /** USER_EDIT_BEGIN **/
     case USER_EDIT_BEGIN:
-      return Object.assign({}, state, {
-        editing: {
-          inProgress: true,
-          user: action.user
-        }
-      });  
+      newState = {
+        editing: action.user
+      };
+      changes = {
+        status: 'editing'
+      }
+      return createStateWithNewUser(action.user, changes, state, newState);  
 
     /** USER_EDIT_COMPLETE **/
     case USER_EDIT_COMPLETE:
-      index = state.all.indexOf(action.current);
-      newState = Object.assign({}, state, {
-        editing: {
-          inProgress: false,
-          user: null
-        }
-      });
-      params = Object.assign({}, action.current, action.changes);
-      newState.all[index] = new User(params);
-      return newState;
+      newState = {
+        editing: action.user
+      };
+      action.changes.status = 'saved';
+      return createStateWithNewUser(action.current, action.changes, state, newState);
 
     /** USERS_SET_SORTING **/
     case USERS_SET_SORTING:

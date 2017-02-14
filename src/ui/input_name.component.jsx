@@ -6,18 +6,23 @@ class InputName extends React.Component {
     super(props);
   }
 
+
+
   render() {
     return(
         <input 
-          type="text" name="name" 
-          value={this.props.value} 
-          autoFocus={this.props.autoFocus}
-          required={this.props.required}
-          tabIndex={this.props.tabIndex}
-          disabled={this.props.disabled}
-          onChange={(e)=>this.props.handleChange(e)} 
+          ref={(input)=>this.elem=input}
+          id="name" 
+          name="name" 
+          type="text"
+          placeholder="Name"
+          {...this.props}
         />
     );
+  }
+
+  componentDidUpdate(){
+    if(this.props['data-focus-on-mount']) this.elem.focus();
   }
 }
 

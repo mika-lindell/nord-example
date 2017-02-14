@@ -1,8 +1,6 @@
-*{
-  color: green;
-}
 
-*[disabled]{
-  background-color: transparent;
-  border: none;
+.users-header-name,
+.users-header-age,
+.users-header-gender{
+  padding-left: 1.2rem;
 }

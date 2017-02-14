@@ -1,0 +1,78 @@
+.font-size-regular{
+  font-size: $font-size-regular;
+} 
+
+.font-size-small{
+  font-size: $font-size-small;
+}
+
+.font-color-regular{
+  color: $font-color-regular;
+}
+.font-color-light{
+  color: $font-color-light;
+}
+.font-color-white{
+  color: $font-color-white;
+}
+
+.font-weight-light{
+  font-weight: 300;
+}
+
+.font-weight-regular{
+  font-weight: 400;
+}
+
+.font-weight-bold{
+  font-weight: 700;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.pure-button-primary{
+  background-color: $nord-blue-strong;
+  color: $nord-white;
+}
+
+.button-link{
+  background: none;
+  border: none;
+  padding: 0.5rem 0.5rem;
+
+  &:hover{
+    color: $nord-blue-strong;
+  }
+
+  &:active{
+    color: $nord-blue-strong;
+    box-shadow: none;
+  }
+}
+
+.form-inline{
+  label{
+    position: absolute;
+    color: transparent;
+  }
+  input,
+  select{
+    margin-right: 0.5rem;
+  }
+}
+
+.success{
+  background-color: $success-green; 
+  @extend .font-color-white;
+}
+
+.warning{
+  background-color: $warning-red; 
+  @extend .font-color-white;
+}

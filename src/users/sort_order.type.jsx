@@ -1,6 +1,6 @@
 class SortOrder {
   constructor(args = {}){
-    this.key = args.key || 'id';
+    this.key = args.key || 'name';
     if(typeof args.asc !== 'undefined')
       this.asc =  args.asc
     else
