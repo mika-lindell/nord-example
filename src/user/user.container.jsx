@@ -19,7 +19,8 @@ class UserComponent extends React.Component {
       name: this.props.user.name,
       age: this.props.user.age,
       gender: this.props.user.gender,
-      focus: false
+      focus: false,
+      countdown: 5
     }
   }
 
@@ -41,7 +42,7 @@ class UserComponent extends React.Component {
               className="user-undo" 
               onClick={()=>this.cancelDeleting(this.props.user)}
             >
-              Undo
+              Undo ({this.state.countdown})
             </button>
           </td>    
         </tr>
@@ -138,10 +139,26 @@ class UserComponent extends React.Component {
   }
 
   beginDeleting(user){
+
     this.props.dispatch(
       userRemoveBegin(user)
     );
-    setTimeout(()=>this.doneDeleting(), 5000)
+
+    let delay = setTimeout(() => {
+      if(this.props.user.status === 'deleting') this.doneDeleting();
+    }, 6000)
+    
+    let timer = setInterval(() => {
+      if(this.state.countdown <= 0 || this.props.user.status !== 'deleting') {
+        clearInterval(timer);
+        clearTimeout(delay);
+        this.state.countdown=5;
+      }else{
+        this.setState({countdown: this.state.countdown-1});
+      }
+    }, 1000);
+
+
   }
 
   cancelDeleting(user){
