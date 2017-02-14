@@ -103,7 +103,7 @@ class UserComponent extends React.Component {
                 </button>
             }
             {saved &&
-              <div className="user-badge-saved">Saved</div>
+              <div className="user-badge-saved"><i className="icon-check" /></div>
             }      
           </td>
         </tr>
